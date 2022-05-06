@@ -34,7 +34,6 @@
     }
 
     function listEstudiantes() {
-        $('#id_estudiante').select2();
         $.ajax({
             url: 'api/listEstudiantes',
             method: "POST",
@@ -60,8 +59,8 @@
             }
         });
     }
+
     function listGrpos() {
-        $('#id_grupo').select2();
         $.ajax({
             url: 'api/listGrupos',
             method: "POST",
@@ -89,64 +88,77 @@
         });
     }
 
-    $('#form_concentrado').on('submit', function (event) {
-        event.preventDefault();
-        if ($('#guardar').val() == 'Guardar') {
-            $.ajax({
-                url: 'api/insertConcentrado',
-                method: "POST",
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                dataType: "json",
-                success: function (data) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Asignar estudiante a un grupo',
-                        text: 'Se agrego un estudiante al grupo con exito.',
-                    });
-                    $('#table_concentrados').DataTable().ajax.reload();
-                    $('#form_concentrado')[0].reset();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    Swal.fire({
+    $('#form_concentrado').validate({
+        rules: {
+            id_estudiante: {
+            required: true
+          },
+          id_grupo: {
+            required: true
+          }
+        },
+        messages: {
+            id_estudiante: {
+            required: 'Selecciona un estudiante.'
+          },
+          id_grupo: {
+            required: 'Selecciona un grupo.'
+          }
+        },
+        submitHandler: function (form) {
+            if ($('#guardar').val() == 'Guardar') {
+                $(form).ajaxSubmit({
+                    type: 'POST',
+                    data: $(form).serialize(),
+                    url: 'api/insertConcentrado',
+                    success: function () {
+                        $('#table_concentrados').DataTable().ajax.reload();
+                        $('#form_concentrado')[0].reset();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Se asigno un estudiante a un grupo.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: function () {
+                      Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'No fue posible asignar un estudiante el grupo intente nuevamente.',
-                    });
-                }
-            });
-        }
-        else if ($('#guardar').val() == 'Actualizar') {
-            $.ajax({
-                url: 'api/updateConcentrado',
-                method: "POST",
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                dataType: "json",
-                success: function (data) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Actualizar grupo',
-                        text: 'Se actualizo un grupo con exito.',
-                    });
-                    $('#table_concentrados').DataTable().ajax.reload();
-                    $('#form_concentrado')[0].reset();
-                    $('#guardar').removeClass('btn-outline-success');
-                    $('#guardar').addClass('btn-outline-primary');
-                    $('#guardar').val('Guardar');
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    Swal.fire({
+                        title: 'Opps no fue posible asignar el estudiante al grupo.',
+                        showConfirmButton: false,
+                        timer: 1500
+                      }); 
+                    }
+                });
+            }
+            else if ($('#guardar').val() == 'Actualizar') {
+                $(form).ajaxSubmit({
+                    type: 'POST',
+                    data: $(form).serialize(),
+                    url: 'api/updateConcentrado',
+                    success: function () {
+                        $('#table_concentrados').DataTable().ajax.reload();
+                        $('#form_concentrado')[0].reset();
+                        $('#guardar').removeClass('btn-outline-success');
+                        $('#guardar').addClass('btn-outline-primary');
+                        $('#guardar').val('Guardar');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Estudiante asignado a otro grupo.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: function () {
+                      Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'No fue posible actualizar el grupo intente nuevamente.',
-                    });
-                }
-            });
+                        title: 'Opps no fue posible asignar al estudiante al nuevo grupo.',
+                        showConfirmButton: false,
+                        timer: 1500
+                      }); 
+                    }
+                });
+            }
         }
     });
 

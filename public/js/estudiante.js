@@ -34,64 +34,100 @@
         });
     }
 
-    $('#form_estudiante').on('submit', function (event) {
-        event.preventDefault();
-        if ($('#guardar').val() == 'Guardar') {
-            $.ajax({
-                url: 'api/insertEstudiante',
-                method: "POST",
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                dataType: "json",
-                success: function (data) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Usuario nuevo',
-                        text: 'Se agrego un usuario con exito.',
-                    });
-                    $('#table_estudiantes').DataTable().ajax.reload();
-                    $('#form_estudiante')[0].reset();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    Swal.fire({
+    $('#form_estudiante').validate({
+        rules: {
+          nombre: {
+            required: true,
+            minlength: 3
+          },
+          apellidos: {
+            required: true,
+            minlength: 3
+          },
+          email: {
+            required: true,
+            email: true
+          },
+          edad: {
+            required: true
+          },
+          telefono: {
+            required: true
+          }
+        },
+        messages: {
+          nombre: {
+            required: 'Ingresa tu nombre.',
+            minlength: 'Tu nombre debe tener mas de 2 letras'
+          },
+          apellidos: {
+            required: 'Ingresa tus apellidos.',
+            minlength: 'Tu apellido debe tener mas de 2 letras'
+          },
+          email: {
+            required: 'Ingresa tu email'
+          },
+          edad: {
+            required: 'Ingresa tu edad.'
+          },
+          telefono: {
+            required: 'Ingresa tu numero telefonico.'
+          }
+        },
+        submitHandler: function (form) {
+            if ($('#guardar').val() == 'Guardar') {
+                $(form).ajaxSubmit({
+                    type: 'POST',
+                    data: $(form).serialize(),
+                    url: 'api/insertEstudiante',
+                    success: function () {
+                        $('#table_estudiantes').DataTable().ajax.reload();
+                        $('#form_estudiante')[0].reset();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Se agrego un nuevo estudiante.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: function () {
+                      Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'No fue posible agregar el usuario intente nuevamente.',
-                    });
-                }
-            });
-        }
-        else if ($('#guardar').val() == 'Actualizar') {
-            $.ajax({
-                url: 'api/updateEstudiante',
-                method: "POST",
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                dataType: "json",
-                success: function (data) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Actualizar estudiante',
-                        text: 'Se actualizo un estudiante con exito.',
-                    });
-                    $('#table_estudiantes').DataTable().ajax.reload();
-                    $('#form_estudiante')[0].reset();
-                    $('#guardar').removeClass('btn-outline-success');
-                    $('#guardar').addClass('btn-outline-primary');
-                    $('#guardar').val('Guardar');
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    Swal.fire({
+                        title: 'TOpps no fue posible agregar el estudiante verifica los campos.',
+                        showConfirmButton: false,
+                        timer: 1500
+                      }); 
+                    }
+                });
+            }
+            else if ($('#guardar').val() == 'Actualizar') {
+                $(form).ajaxSubmit({
+                    type: 'POST',
+                    data: $(form).serialize(),
+                    url: 'api/updateEstudiante',
+                    success: function () {
+                        $('#table_estudiantes').DataTable().ajax.reload();
+                        $('#form_estudiante')[0].reset();
+                        $('#guardar').removeClass('btn-outline-success');
+                        $('#guardar').addClass('btn-outline-primary');
+                        $('#guardar').val('Guardar');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'La información del estudiante fue actualizada.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: function () {
+                      Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'No fue posible actualizar al estudiante intente nuevamente.',
-                    });
-                }
-            });
+                        title: 'Opps no fue posible actualizar al estudiante',
+                        showConfirmButton: false,
+                        timer: 1500
+                      }); 
+                    }
+                });
+            }
         }
     });
 

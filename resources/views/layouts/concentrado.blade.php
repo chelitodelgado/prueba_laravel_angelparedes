@@ -15,13 +15,17 @@
                             <div class="col-xl-6 py-2">
                                 <div class="form-group">
                                     <label for="name">Estudiante</label>
-                                    <select name="id_estudiante" id="id_estudiante" class="form-control" required></select>
+                                    <select name="id_estudiante"
+                                    id="id_estudiante"
+                                    class="form-control"></select>
                                 </div>
                             </div>
                             <div class="col-xl-6 py-2">
                                 <div class="form-group">
                                     <label for="name">Grupos</label>
-                                    <select name="id_grupo" id="id_grupo" class="form-control" required></select>
+                                    <select name="id_grupo"
+                                    id="id_grupo"
+                                    class="form-control"></select>
                                 </div>
                             </div>
                         </div>

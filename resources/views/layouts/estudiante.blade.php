@@ -17,8 +17,9 @@
                                     <label for="name">Nombre</label>
                                     <input type="text"
                                     id="nombre"
-                                    name="nombre" class="form-control"
-                                    placeholder="Nombre" required>
+                                    name="nombre"
+                                    class="form-control"
+                                    placeholder="Nombre">
                                 </div>
                             </div>
                             <div class="col-xl-7 py-2">
@@ -27,7 +28,8 @@
                                     <input type="text"
                                     id="apellidos"
                                     name="apellidos"
-                                    class="form-control" placeholder="Apellidos completos" required>
+                                    class="form-control"
+                                    placeholder="Apellidos completos">
                                 </div>
                             </div>
                             <div class="col-xl-12 py-2">
@@ -36,7 +38,8 @@
                                     <input type="email"
                                     id="email"
                                     name="email"
-                                    class="form-control" placeholder="Email" required>
+                                    class="form-control"
+                                    placeholder="Email" required>
                                 </div>
                             </div>
                             <div class="col-xl-6 py-2">
@@ -45,7 +48,8 @@
                                     <input type="test"
                                     id="edad"
                                     name="edad"
-                                    class="form-control" placeholder="Edad" required>
+                                    class="form-control"
+                                    placeholder="Edad">
                                 </div>
                             </div>
                             <div class="col-xl-6 py-2">
@@ -54,7 +58,8 @@
                                     <input type="tel"
                                     name="telefono"
                                     id="telefono"
-                                    class="form-control" placeholder="Telefono" required>
+                                    class="form-control"
+                                    placeholder="Telefono">
                                 </div>
                             </div>
                         </div>

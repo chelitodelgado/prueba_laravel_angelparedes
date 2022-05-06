@@ -17,8 +17,9 @@
                                     <label for="semestre">Semestre</label>
                                     <input type="text"
                                     id="semestre"
-                                    name="semestre" class="form-control"
-                                    placeholder="Semestre" required>
+                                    name="semestre"
+                                    class="form-control"
+                                    placeholder="Semestre">
                                 </div>
                             </div>
                             <div class="col-xl-6 py-2">
@@ -27,7 +28,8 @@
                                     <input type="text"
                                     id="grupo"
                                     name="grupo"
-                                    class="form-control" placeholder="Grupo" required>
+                                    class="form-control"
+                                    placeholder="Grupo">
                                 </div>
                             </div>
                             <div class="col-xl-6 py-2">
@@ -36,7 +38,8 @@
                                     <input type="test"
                                     id="turno"
                                     name="turno"
-                                    class="form-control" placeholder="Turno" required>
+                                    class="form-control"
+                                    placeholder="Turno">
                                 </div>
                             </div>
                             <div class="col-xl-6 py-2">
