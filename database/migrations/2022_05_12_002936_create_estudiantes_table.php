@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGruposTable extends Migration
+class CreateEstudiantesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateGruposTable extends Migration
      */
     public function up()
     {
-        Schema::create('grupos', function (Blueprint $table) {
+        Schema::create('estudiantes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('semestre');
-            $table->string('grupo');
-            $table->string('turno');
+            $table->string('nombre', 20);
+            $table->string('apellidos', 30);
+            $table->date('fecha_nacimiento');
+            $table->string('email')->unique();
+            $table->string('telefono',11);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateGruposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grupos');
+        Schema::dropIfExists('estudiantes');
     }
 }

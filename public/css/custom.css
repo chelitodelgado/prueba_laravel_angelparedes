@@ -8,7 +8,24 @@ body{
     background:#eee;
 }
 
-/* welcome */
+a {
+    text-decoration: none;
+}
+
+/*Botones de enlaces*/
+.btn-enlaces {
+    margin: 5px;
+    width: 150px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: orange;
+    color: white;
+}
+
+/* Tarjeta de bienvenida */
 .card {
     border:none;
     position:relative;
@@ -63,5 +80,13 @@ body{
     color:#8E24AA;
     font-size:19px;
 }
+/* FIn de tarjeta */
 
-/* End Welcome */
+/* Validaciones color */
+input:invalid {
+    border: 1px solid #CCC;
+}
+
+input:valid {
+    border: 1px solid rgb(92, 92, 223);
+}

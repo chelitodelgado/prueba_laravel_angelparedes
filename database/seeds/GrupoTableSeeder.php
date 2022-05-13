@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,9 +13,9 @@ class GrupoTableSeeder extends Seeder
     public function run()
     {
         DB::table('grupos')->insert([
-            'semestre' => 'Primero',
+            'semestre' => '1°',
             'grupo'    => 'A',
-            'turno'    => 'Matutino',
+            'turno'    => 'Manutino'
         ]);
     }
 }
